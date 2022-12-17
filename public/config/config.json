@@ -1,0 +1,20 @@
+{
+  "CONTRACT_ADDRESS": "0xaC221426aEAA80C5642340BEae1e5Ed2C703C2c9",
+  "SCAN_LINK": "https://goerli.etherscan.io/address/0xaC221426aEAA80C5642340BEae1e5Ed2C703C2c9",
+  "NETWORK": {
+    "NAME": "Ethereum",
+    "SYMBOL": "ETH",
+    "ID": 5
+  },
+  "NFT_NAME": "Becha",
+  "SYMBOL": "Becha",
+  "MAX_SUPPLY": 100,
+  "WEI_COST_AL": 8000000000000000,
+  "WEI_COST": 10000000000000000,
+  "DISPLAY_COST_AL": 0.008,
+  "DISPLAY_COST": 0.01,
+  "GAS_LIMIT": 285000,
+  "MARKETPLACE": "Opeansea",
+  "MARKETPLACE_LINK": "",
+  "SHOW_BACKGROUND": false
+}
