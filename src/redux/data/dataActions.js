@@ -29,10 +29,21 @@ export const fetchData = (account) => {
         .getState()
         .blockchain.smartContract.methods.tokenCount()
         .call();
+        let alSaleStart = await store
+        .getState()
+        .blockchain.smartContract.methods.presale()
+        .call();
+        let saleStart = await store
+        .getState()
+        .blockchain.smartContract.methods.publicsale()
+        .call();
+
 
       dispatch(
         fetchDataSuccess({
           totalSupply,
+          alSaleStart,
+          saleStart, 
         })
       );
     } catch (err) {

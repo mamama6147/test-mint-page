@@ -135,6 +135,11 @@ export const StyledLink = styled.a`
   text-decoration: none;
 `;
 
+export const StyledLinkTwi = styled.a`
+  color: var(--accent-text);
+  text-decoration: none;
+`;
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -200,7 +205,6 @@ function App() {
       });
   };
 
-
   const claimNFTsPS = () => {
     let cost = CONFIG.WEI_COST;
     let amount = mintAmount;
@@ -246,7 +250,6 @@ function App() {
     }
   };
 
-
   const checkMinted = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       blockchain.smartContract.methods
@@ -258,7 +261,6 @@ function App() {
         });
     }
   };
-
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
@@ -332,6 +334,9 @@ function App() {
         <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
+          <s.Container flex={1} jc={"center"} ai={"center"}>
+            <StyledImg alt={"side"} src={"/config/images/side.png"} />
+          </s.Container>
           <s.SpacerLarge />
           <s.Container
             flex={2}
@@ -348,7 +353,7 @@ function App() {
             <s.TextTitle
               style={{ textAlign: "center", color: "var(--accent-text)" }}
             >
-              {"No Roadmap, No Discord, No Utility, No Rarity"}
+              {"No Roadmap, No Discord, No Utility, No Rarity."}
             </s.TextTitle>
             <s.TextTitle
               style={{ textAlign: "center", color: "var(--accent-text)" }}
@@ -366,9 +371,7 @@ function App() {
               <s.SpacerXSmall />
               <s.TextDescription
                 style={{ textAlign: "center", color: "var(--accent-text)" }}
-              >
-                {/* <AudioPlayer></AudioPlayer> */}
-              </s.TextDescription>
+              ></s.TextDescription>
               {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
@@ -487,89 +490,123 @@ function App() {
                     <s.SpacerMedium />
                     <s.Container>
                       {/* ALチェックここから */}
-                      {al > 0 ? ( //Aホワイトリスト所有確認
+                      {al > 0 ? ( //AL所有確認
                         <>
-                          <>
-                            {minted >= 2 ? ( //ミント済確認
-                              <>
-                                <s.Container
-                                  ai={"center"}
-                                  jc={"center"}
-                                  fd={"row"}
-                                >
-                                  <StyledButton
-                                    disabled={1} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                    }}
-                                  >
-                                    {"Your 2 mint is done."}
-                                  </StyledButton>
-                                </s.Container>
-                              </>
-                            ) : (
-                              <>
-                                <s.SpacerMedium />
-                                <s.Container>
+                          {data.alSaleStart ? ( // セール開始前
+                            <>
+                              {minted >= 2 ? ( //ミント済確認
+                                <>
                                   <s.Container
                                     ai={"center"}
                                     jc={"center"}
                                     fd={"row"}
                                   >
-                                    <s.SpacerXSmall />
-                                    <StyledRoundButton
-                                      style={{ lineHeight: 0.4 }}
-                                      disabled={claimingNft ? 1 : 0}
+                                    <StyledButton
+                                      disabled={1} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                       onClick={(e) => {
                                         e.preventDefault();
-                                        decrementMintAmountAl();
                                       }}
                                     >
-                                      -
-                                    </StyledRoundButton>
-                                    <s.SpacerMedium />
-                                    <s.TextDescription
-                                      style={{
-                                        textAlign: "center",
-                                        color: "var(--accent-text)",
-                                      }}
-                                    >
-                                      {mintAmount}
-                                    </s.TextDescription>
-                                    <s.SpacerMedium />
-                                    <StyledRoundButton
-                                      disabled={claimingNft ? 1 : 0}
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        incrementMintAmountAl();
-                                      }}
-                                    >
-                                      +
-                                    </StyledRoundButton>
+                                      {"Your 2 mint is done."}
+                                    </StyledButton>
                                   </s.Container>
-                                </s.Container>
-                                <s.SpacerSmall />
-                                <s.Container
-                                  ai={"center"}
-                                  jc={"center"}
-                                  fd={"row"}
-                                >
-                                  <StyledButton
-                                    disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      claimNFTsAl();
-                                      getData();
-                                    }}
+                                </>
+                              ) : (
+                                //残りミント可能枠有り
+                                <>
+                                  <s.SpacerMedium />
+                                  <s.Container>
+                                    <s.Container
+                                      ai={"center"}
+                                      jc={"center"}
+                                      fd={"row"}
+                                    >
+                                      <s.SpacerXSmall />
+                                      <StyledRoundButton
+                                        style={{ lineHeight: 0.4 }}
+                                        disabled={claimingNft ? 1 : 0}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          decrementMintAmountAl();
+                                        }}
+                                      >
+                                        -
+                                      </StyledRoundButton>
+                                      <s.SpacerMedium />
+                                      <s.TextDescription
+                                        style={{
+                                          textAlign: "center",
+                                          color: "var(--accent-text)",
+                                        }}
+                                      >
+                                        {mintAmount}
+                                      </s.TextDescription>
+                                      <s.SpacerMedium />
+                                      <StyledRoundButton
+                                        disabled={claimingNft ? 1 : 0}
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          incrementMintAmountAl();
+                                        }}
+                                      >
+                                        +
+                                      </StyledRoundButton>
+                                    </s.Container>
+                                  </s.Container>
+                                  <s.SpacerSmall />
+                                  <s.Container
+                                    ai={"center"}
+                                    jc={"center"}
+                                    fd={"row"}
                                   >
-                                    {claimingNft ? "Minting..." : "AL Mint"}
-                                  </StyledButton>
-                                </s.Container>
-                              </>
-                            )}
-                          </>
+                                    <StyledButton
+                                      disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        claimNFTsAl();
+                                        getData();
+                                      }}
+                                    >
+                                      {claimingNft ? "Minting..." : "AL Mint"}
+                                    </StyledButton>
+                                  </s.Container>
+                                </>
+                              )}
+                            </>
+                          ) : (
+                            // セール開始前
+                            <>
+                              <s.Container
+                                ai={"center"}
+                                jc={"center"}
+                                fd={"row"}
+                              >
+                                <s.TextDescription
+                                  style={{
+                                    color: "var(--accent-text)",
+                                  }}
+                                >
+                                  {"You are registerd in AL."}
+                                </s.TextDescription>
+                              </s.Container>
+                              <s.Container
+                                ai={"center"}
+                                jc={"center"}
+                                fd={"row"}
+                              >
+                                <s.TextDescription
+                                  style={{
+                                    color: "var(--accent-text)",
+                                  }}
+                                >
+                                  {"ComingSoon."}
+                                </s.TextDescription>
+                              </s.Container>
+                            </>
+                          )}
                         </>
                       ) : (
+                        //AL所有無し
                         <s.Container ai={"center"} jc={"center"} fd={"row"}>
                           <s.TextDescription
                             style={{
@@ -584,82 +621,121 @@ function App() {
                       {/* ALチェックここまで */}
 
                       {/* PSここから */}
-                      {minted >= 2 ? (
+                      {data.saleStart ? ( //PS開始チェック
                         <>
-                          <s.SpacerMedium />
-                          <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                            <StyledButtonPS
-                              disabled={1}
-                              onClick={(e) => {
-                                e.preventDefault();
-                              }}
-                            >
-                              {"Your 2 mint is done."}
-                            </StyledButtonPS>
-                          </s.Container>
+                          {minted >= 2 ? ( //ミント済確認
+                            <>
+                              <s.SpacerMedium />
+                              <s.Container
+                                ai={"center"}
+                                jc={"center"}
+                                fd={"row"}
+                              >
+                                <StyledButtonPS
+                                  disabled={1}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                  }}
+                                >
+                                  {"Your 2 mint is done."}
+                                </StyledButtonPS>
+                              </s.Container>
+                            </>
+                          ) : ( //残りミント可能枠有り
+                            <>
+                              <s.SpacerMedium />
+                              <s.Container>
+                                <s.Container
+                                  ai={"center"}
+                                  jc={"center"}
+                                  fd={"row"}
+                                >
+                                  <s.SpacerXSmall />
+                                  <StyledRoundButton
+                                    style={{ lineHeight: 0.4 }}
+                                    disabled={claimingNft ? 1 : 0}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      decrementMintAmount();
+                                    }}
+                                  >
+                                    -
+                                  </StyledRoundButton>
+                                  <s.SpacerMedium />
+                                  <s.TextDescription
+                                    style={{
+                                      textAlign: "center",
+                                      color: "var(--accent-text)",
+                                    }}
+                                  >
+                                    {mintAmount}
+                                  </s.TextDescription>
+                                  <s.SpacerMedium />
+                                  <StyledRoundButton
+                                    disabled={claimingNft ? 1 : 0}
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      incrementMintAmount();
+                                    }}
+                                  >
+                                    +
+                                  </StyledRoundButton>
+                                </s.Container>
+                              </s.Container>
+                              <s.SpacerSmall />
+                              <s.Container
+                                ai={"center"}
+                                jc={"center"}
+                                fd={"row"}
+                              >
+                                <StyledButtonPS
+                                  disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    claimNFTsPS();
+                                    getData();
+                                  }}
+                                >
+                                  {claimingNft ? "Minting..." : "PS Mint"}
+                                </StyledButtonPS>
+                              </s.Container>
+                              {minted > 0 ? <></> : <></>}
+                            </>
+                          )}
                         </>
-                      ) : (
+                      ) : ( //PS開始前
                         <>
-                          <s.SpacerMedium />
-                          <s.Container>
-                            <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                              <s.SpacerXSmall />
-                              <StyledRoundButton
-                                style={{ lineHeight: 0.4 }}
-                                disabled={claimingNft ? 1 : 0}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  decrementMintAmount();
-                                }}
-                              >
-                                -
-                              </StyledRoundButton>
-                              <s.SpacerMedium />
-                              <s.TextDescription
-                                style={{
-                                  textAlign: "center",
-                                  color: "var(--accent-text)",
-                                }}
-                              >
-                                {mintAmount}
-                              </s.TextDescription>
-                              <s.SpacerMedium />
-                              <StyledRoundButton
-                                disabled={claimingNft ? 1 : 0}
-                                onClick={(e) => {
-                                  e.preventDefault();
-                                  incrementMintAmount();
-                                }}
-                              >
-                                +
-                              </StyledRoundButton>
-                            </s.Container>
-                          </s.Container>
-                          <s.SpacerSmall />
                           <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                            <StyledButtonPS
-                              disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
-                              onClick={(e) => {
-                                e.preventDefault();
-                                claimNFTsPS();
-                                getData();
+                            <s.TextDescription
+                              style={{
+                                color: "var(--accent-text)",
                               }}
                             >
-                              {claimingNft ? "Minting..." : "PS Mint"}
-                            </StyledButtonPS>
+                              {"PS ComingSoon."}
+                            </s.TextDescription>
                           </s.Container>
-                          {minted > 0 ? <></> : <></>}
                         </>
                       )}
+
                       {/* PSここまで */}
                     </s.Container>
                   </>
                 )}
               </>
             )}
-            <s.SpacerMedium />
+            <s.SpacerLarge />
+            <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                  {CONFIG.MARKETPLACE}
+            </StyledLink>
           </s.Container>
           <s.SpacerLarge />
+          <s.Container flex={1} jc={"center"} ai={"center"}>
+            <StyledImg
+              alt={"side"}
+              src={"/config/images/side.png"}
+              style={{ transform: "scaleX(-1)" }}
+            />
+          </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
         <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
@@ -676,6 +752,15 @@ function App() {
               color: "var(--primary-text)",
             }}
           ></s.TextDescription>
+          <StyledLinkTwi
+            target={"_blank"}
+            href={"https://twitter.com/bechabecha_nft"}
+          >
+            @bechabecha_nft
+          </StyledLinkTwi>
+          <s.TextTitle
+            style={{ textAlign: "center", color: "var(--accent-text)" }}
+          ></s.TextTitle>
         </s.Container>
       </s.Container>
     </s.Screen>

@@ -102,8 +102,9 @@ export const connect = () => {
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
               // params: [{ chainId: '0x1' }], // イーサチェーンのID（16進数）
+              params: [{ chainId: '0x5' }], // Goerli テストネットのID（16進数）
               // params: [{ chainId: '0x4' }], // rinkebyのID（16進数）
-              params: [{ chainId: '0x89' }], // polygonMainのID（16進数）
+              // params: [{ chainId: '0x89' }], // polygonMainのID（16進数）
             });
           } catch (error) {
             // エラーの場合、チェーン追加を試みる
@@ -114,8 +115,8 @@ export const connect = () => {
                   params: [
                     {
                       // chainId: '0x1', //イーサ
-                      // chainId: '0x4', //rinkeby
-                      chainId: '0x89', //polygonMain
+                      chainId: '0x5', //Goerli
+                      // chainId: '0x89', //polygonMain
                       // rpcUrl: 'https://mainnet-infura.brave.com/',
                     },
                   ],
