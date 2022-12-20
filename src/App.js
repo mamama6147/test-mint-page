@@ -116,7 +116,6 @@ export const StyledLogo = styled.img`
 `;
 
 export const StyledImg = styled.img`
-  box-shadow: 0px 5px 11px 2px rgba(0, 0, 0, 0.7);
   border: 4px var(--secondary);
   background-color: var(--accent);
   border-radius: 100%;
@@ -335,7 +334,14 @@ function App() {
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"left_side"} src={"/config/images/left_side.png"} />
+            <StyledImg
+              alt={"left_side"}
+              src={"/config/images/left_side.png"}
+              style={{
+                padding: 24,
+                backgroundColor: "var(--primary)",
+              }}
+            />
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -641,7 +647,8 @@ function App() {
                                 </StyledButtonPS>
                               </s.Container>
                             </>
-                          ) : ( //残りミント可能枠有り
+                          ) : (
+                            //残りミント可能枠有り
                             <>
                               <s.SpacerMedium />
                               <s.Container>
@@ -703,7 +710,8 @@ function App() {
                             </>
                           )}
                         </>
-                      ) : ( //PS開始前
+                      ) : (
+                        //PS開始前
                         <>
                           <s.Container ai={"center"} jc={"center"} fd={"row"}>
                             <s.TextDescription
@@ -725,7 +733,7 @@ function App() {
             )}
             <s.SpacerLarge />
             <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
+              {CONFIG.MARKETPLACE}
             </StyledLink>
           </s.Container>
           <s.SpacerLarge />
@@ -733,7 +741,11 @@ function App() {
             <StyledImg
               alt={"right_side"}
               src={"/config/images/right_side.png"}
-              style={{ transform: "scaleX(-1)" }}
+              style={{
+                padding: 24,
+                backgroundColor: "var(--primary)",
+                // transform: "scaleX(-1)",
+              }}
             />
           </s.Container>
         </ResponsiveWrapper>
