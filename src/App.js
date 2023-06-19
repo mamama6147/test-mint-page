@@ -334,14 +334,14 @@ function App() {
         <s.SpacerSmall />
         <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
+            {/* <StyledImg
               alt={"left_side"}
               src={"/config/images/left_side.png"}
               style={{
                 padding: 24,
                 backgroundColor: "var(--primary)",
               }}
-            />
+            /> */}
           </s.Container>
           <s.SpacerLarge />
           <s.Container
@@ -356,6 +356,8 @@ function App() {
               boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
+            <StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
+            
             <s.TextTitle
               style={{ textAlign: "center", color: "var(--accent-text)" }}
             >
@@ -738,7 +740,7 @@ function App() {
           </s.Container>
           <s.SpacerLarge />
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg
+            {/* <StyledImg
               alt={"right_side"}
               src={"/config/images/right_side.png"}
               style={{
@@ -746,7 +748,7 @@ function App() {
                 backgroundColor: "var(--primary)",
                 // transform: "scaleX(-1)",
               }}
-            />
+            /> */}
           </s.Container>
         </ResponsiveWrapper>
         <s.SpacerMedium />
@@ -766,9 +768,9 @@ function App() {
           ></s.TextDescription>
           <StyledLinkTwi
             target={"_blank"}
-            href={"https://twitter.com/bechabecha_nft"}
+            href={"https://twitter.com/test"}
           >
-            @bechabecha_nft
+            @twitter_account_test
           </StyledLinkTwi>
           <s.TextTitle
             style={{ textAlign: "center", color: "var(--accent-text)" }}
