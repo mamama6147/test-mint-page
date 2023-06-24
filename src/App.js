@@ -9,136 +9,6 @@ import axios from "axios";
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
-export const StyledButton = styled.button`
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: var(--button-bg);
-  padding: 10px;
-  font-weight: bold;
-  color: var(--secondary-text);
-  width: 100px;
-  cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
-
-export const StyledButtonPS = styled.button`
-  padding: 10px;
-  border-radius: 5px;
-  border: none;
-  background-color: var(--button-bg);
-  padding: 10px;
-  font-weight: bold;
-  color: var(--secondary-text);
-  width: 100px;
-  cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
-
-export const StyledButtonUnlock = styled.button`
-  padding: 10px;
-  border-radius: 50px;
-  border: none;
-  background-color: purple;
-  padding: 10px;
-  font-weight: bold;
-  color: var(--secondary-text);
-  width: 100px;
-  cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
-
-export const StyledRoundButton = styled.button`
-  padding: 10px;
-  border-radius: 100%;
-  border: none;
-  background-color: var(--primary);
-  padding: 10px;
-  font-weight: bold;
-  font-size: 15px;
-  color: var(--primary-text);
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
-
-export const ResponsiveWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: stretched;
-  align-items: stretched;
-  width: 100%;
-  @media (min-width: 767px) {
-    flex-direction: row;
-  }
-`;
-
-export const StyledLogo = styled.img`
-  width: 200px;
-  @media (min-width: 767px) {
-    width: 300px;
-  }
-  transition: width 0.5s;
-  transition: height 0.5s;
-`;
-
-export const StyledImg = styled.img`
-  border: 4px var(--secondary);
-  background-color: var(--accent);
-  border-radius: 100%;
-  width: 200px;
-  @media (min-width: 900px) {
-    width: 250px;
-  }
-  @media (min-width: 1000px) {
-    width: 300px;
-  }
-  transition: width 0.5s;
-`;
-
-export const StyledLink = styled.a`
-  color: var(--secondary);
-  text-decoration: none;
-`;
-
-export const StyledLinkTwi = styled.a`
-  color: var(--accent-text);
-  text-decoration: none;
-`;
-
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -327,71 +197,75 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ padding: 24, backgroundColor: "var(--primary)" }}
+        style={{ padding: 24, backgroundColor: "rgba(0,0,0,0)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+        <s.StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
         <s.SpacerSmall />
-        <ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            {/* <StyledImg
-              alt={"left_side"}
-              src={"/config/images/left_side.png"}
-              style={{
-                padding: 24,
-                backgroundColor: "var(--primary)",
-              }}
-            /> */}
-          </s.Container>
-          <s.SpacerLarge />
+        <s.ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container
             flex={2}
             jc={"center"}
             ai={"center"}
             style={{
-              backgroundColor: "var(--accent)",
+              // backgroundColor: "var(--accent)",
               padding: 24,
-              borderRadius: 24,
+              // borderRadius: 24,
               border: "4px var(--secondary)",
-              boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
+              // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            <StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
-            
+            <s.StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
+
             <s.TextTitle
-              style={{ textAlign: "center", color: "var(--accent-text)" }}
+            // style={{ textAlign: "center" }}
             >
-              {"No Roadmap, No Discord, No Utility, No Rarity."}
+              Neo Tokhyo Punks Cartoonは、
+              <br class={"sp-only"} />
+              Neo Tokyo Punksのギルドから生まれたコレクションです。
+              <br />
+              ギルドメンバーをはじめ、
+              <br class={"sp-only"} />
+              皆様の楽しいNFT活動を応援しています。
             </s.TextTitle>
-            <s.TextTitle
-              style={{ textAlign: "center", color: "var(--accent-text)" }}
-            >
-              {"Sale: 2022/11/14 21:00 JST ~ (Open: 48 hours)"}
-            </s.TextTitle>
+            <s.SpacerSmall />
             <s.TextTitle
               style={{
                 textAlign: "center",
                 fontSize: 50,
                 fontWeight: "bold",
-                color: "var(--accent-text)",
+                // color: "var(--accent-text)",
               }}
             >
               <s.SpacerXSmall />
               <s.TextDescription
-                style={{ textAlign: "center", color: "var(--accent-text)" }}
+                style={{ textAlign: "center" }}
               ></s.TextDescription>
               {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
             <s.TextDescription
               style={{
                 textAlign: "center",
-                color: "var(--primary-text)",
+                // color: "var(--primary-text)",
               }}
             >
-              <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+              <s.StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                 {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </StyledLink>
+              </s.StyledLink>
             </s.TextDescription>
+            <s.SpacerSmall />
+            <s.TextTitle style={{ textAlign: "center" }}>
+              オーダーミント期間: <br class={"sp-only"} />
+              2023/08/14 21:00 ~ 08/20 21:00 （6日間）
+              <br />
+              <s.SpacerXSmall />
+              パブリックミント期間: <br class={"sp-only"} />
+              2023/08/20 21:00 ~ <br />
+              <s.SpacerXSmall />
+              リビール: <br class={"sp-only"} />
+              2023/08/27 21:00
+              <br />
+            </s.TextTitle>
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
@@ -400,73 +274,62 @@ function App() {
                 >
                   {CONFIG.NFT_NAME} sold out. Thank you.
                 </s.TextTitle>
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
+                <s.TextDescription style={{ textAlign: "center" }}>
                   You can still find {CONFIG.NFT_NAME} on
                 </s.TextDescription>
                 <s.SpacerSmall />
-                <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
                   {CONFIG.MARKETPLACE}
-                </StyledLink>
+                </s.StyledLink>
               </>
             ) : (
               <>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
+                {/* <s.TextTitle
+                  style={{ textAlign: "center", }}
                 >
                   {"You can 2 mint Per wallet."}
                 </s.TextTitle>
-                <br />
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  1 {CONFIG.SYMBOL} costs
+                <br /> */}
+                <s.TextTitle style={{ textAlign: "center" }}>
+                  {/* 1 {CONFIG.SYMBOL}  */}
+                  価格
                 </s.TextTitle>
                 <s.SpacerXSmall />
 
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  {"AL Sale: "}
+                <s.TextTitle style={{ textAlign: "center" }}>
+                  {"オーダーミント: "}
                   {CONFIG.DISPLAY_COST_AL}
                   {CONFIG.NETWORK.SYMBOL}
                 </s.TextTitle>
-                <s.TextTitle
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  {"Public Sale: "}
+                <s.TextTitle style={{ textAlign: "center" }}>
+                  {"パブリックミント: "}
                   {CONFIG.DISPLAY_COST}
                   {CONFIG.NETWORK.SYMBOL}
                 </s.TextTitle>
                 <s.SpacerXSmall />
-                <s.TextDescription
-                  style={{ textAlign: "center", color: "var(--accent-text)" }}
-                >
-                  + Gas costs.
+                <s.TextDescription style={{ textAlign: "center" }}>
+                  + ガス代
                 </s.TextDescription>
-                <br />
-                <s.SpacerSmall />
+                <s.SpacerXSmall />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
                     <s.SpacerSmall />
-                    <StyledButton
+                    <s.StyledButton
                       onClick={(e) => {
                         e.preventDefault();
                         dispatch(connect());
                         getData();
                       }}
                     >
-                      Connect your wallet
-                    </StyledButton>
+                      ウォレットを接続
+                    </s.StyledButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
                         <s.SpacerSmall />
                         <s.TextDescription
                           style={{
                             textAlign: "center",
-                            color: "var(--accent-text)",
                           }}
                         >
                           {blockchain.errorMsg}
@@ -479,7 +342,6 @@ function App() {
                     <s.TextDescription
                       style={{
                         textAlign: "center",
-                        color: "var(--accent-text)",
                       }}
                     >
                       {feedback}
@@ -487,7 +349,6 @@ function App() {
                     <s.TextTitle
                       style={{
                         textAlign: "center",
-                        color: "var(--accent-text)",
                       }}
                     >
                       {""}
@@ -509,14 +370,14 @@ function App() {
                                     jc={"center"}
                                     fd={"row"}
                                   >
-                                    <StyledButton
+                                    <s.StyledButton
                                       disabled={1} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                       onClick={(e) => {
                                         e.preventDefault();
                                       }}
                                     >
                                       {"Your 2 mint is done."}
-                                    </StyledButton>
+                                    </s.StyledButton>
                                   </s.Container>
                                 </>
                               ) : (
@@ -530,7 +391,7 @@ function App() {
                                       fd={"row"}
                                     >
                                       <s.SpacerXSmall />
-                                      <StyledRoundButton
+                                      <s.StyledRoundButton
                                         style={{ lineHeight: 0.4 }}
                                         disabled={claimingNft ? 1 : 0}
                                         onClick={(e) => {
@@ -539,18 +400,17 @@ function App() {
                                         }}
                                       >
                                         -
-                                      </StyledRoundButton>
+                                      </s.StyledRoundButton>
                                       <s.SpacerMedium />
                                       <s.TextDescription
                                         style={{
                                           textAlign: "center",
-                                          color: "var(--accent-text)",
                                         }}
                                       >
                                         {mintAmount}
                                       </s.TextDescription>
                                       <s.SpacerMedium />
-                                      <StyledRoundButton
+                                      <s.StyledRoundButton
                                         disabled={claimingNft ? 1 : 0}
                                         onClick={(e) => {
                                           e.preventDefault();
@@ -558,7 +418,7 @@ function App() {
                                         }}
                                       >
                                         +
-                                      </StyledRoundButton>
+                                      </s.StyledRoundButton>
                                     </s.Container>
                                   </s.Container>
                                   <s.SpacerSmall />
@@ -567,7 +427,7 @@ function App() {
                                     jc={"center"}
                                     fd={"row"}
                                   >
-                                    <StyledButton
+                                    <s.StyledButton
                                       disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                       onClick={(e) => {
                                         e.preventDefault();
@@ -576,7 +436,7 @@ function App() {
                                       }}
                                     >
                                       {claimingNft ? "Minting..." : "AL Mint"}
-                                    </StyledButton>
+                                    </s.StyledButton>
                                   </s.Container>
                                 </>
                               )}
@@ -590,9 +450,9 @@ function App() {
                                 fd={"row"}
                               >
                                 <s.TextDescription
-                                  style={{
-                                    color: "var(--accent-text)",
-                                  }}
+                                // style={{
+                                //  ,
+                                // }}
                                 >
                                   {"You are registerd in AL."}
                                 </s.TextDescription>
@@ -602,11 +462,7 @@ function App() {
                                 jc={"center"}
                                 fd={"row"}
                               >
-                                <s.TextDescription
-                                  style={{
-                                    color: "var(--accent-text)",
-                                  }}
-                                >
+                                <s.TextDescription>
                                   {"ComingSoon."}
                                 </s.TextDescription>
                               </s.Container>
@@ -619,7 +475,6 @@ function App() {
                           <s.TextDescription
                             style={{
                               textAlign: "center",
-                              color: "var(--accent-text)",
                             }}
                           >
                             {"You don't have Allowlist."}
@@ -639,14 +494,14 @@ function App() {
                                 jc={"center"}
                                 fd={"row"}
                               >
-                                <StyledButtonPS
+                                <s.StyledButtonPS
                                   disabled={1}
                                   onClick={(e) => {
                                     e.preventDefault();
                                   }}
                                 >
                                   {"Your 2 mint is done."}
-                                </StyledButtonPS>
+                                </s.StyledButtonPS>
                               </s.Container>
                             </>
                           ) : (
@@ -660,7 +515,7 @@ function App() {
                                   fd={"row"}
                                 >
                                   <s.SpacerXSmall />
-                                  <StyledRoundButton
+                                  <s.StyledRoundButton
                                     style={{ lineHeight: 0.4 }}
                                     disabled={claimingNft ? 1 : 0}
                                     onClick={(e) => {
@@ -669,18 +524,17 @@ function App() {
                                     }}
                                   >
                                     -
-                                  </StyledRoundButton>
+                                  </s.StyledRoundButton>
                                   <s.SpacerMedium />
                                   <s.TextDescription
                                     style={{
                                       textAlign: "center",
-                                      color: "var(--accent-text)",
                                     }}
                                   >
                                     {mintAmount}
                                   </s.TextDescription>
                                   <s.SpacerMedium />
-                                  <StyledRoundButton
+                                  <s.StyledRoundButton
                                     disabled={claimingNft ? 1 : 0}
                                     onClick={(e) => {
                                       e.preventDefault();
@@ -688,7 +542,7 @@ function App() {
                                     }}
                                   >
                                     +
-                                  </StyledRoundButton>
+                                  </s.StyledRoundButton>
                                 </s.Container>
                               </s.Container>
                               <s.SpacerSmall />
@@ -697,7 +551,7 @@ function App() {
                                 jc={"center"}
                                 fd={"row"}
                               >
-                                <StyledButtonPS
+                                <s.StyledButtonPS
                                   disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                   onClick={(e) => {
                                     e.preventDefault();
@@ -706,7 +560,7 @@ function App() {
                                   }}
                                 >
                                   {claimingNft ? "Minting..." : "PS Mint"}
-                                </StyledButtonPS>
+                                </s.StyledButtonPS>
                               </s.Container>
                               {minted > 0 ? <></> : <></>}
                             </>
@@ -716,11 +570,7 @@ function App() {
                         //PS開始前
                         <>
                           <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                            <s.TextDescription
-                              style={{
-                                color: "var(--accent-text)",
-                              }}
-                            >
+                            <s.TextDescription>
                               {"PS ComingSoon."}
                             </s.TextDescription>
                           </s.Container>
@@ -733,49 +583,24 @@ function App() {
                 )}
               </>
             )}
-            <s.SpacerLarge />
-            <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-              {CONFIG.MARKETPLACE}
-            </StyledLink>
+            <s.SpacerMedium />
+            <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
+              <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                {CONFIG.MARKETPLACE}
+              </s.StyledLink>
+              <s.SpacerXSmall />
+              <s.StyledLink target={"_blank"} href={"https://twitter.com/guild_ntp_oa"}>
+                @guild_ntp_oa
+              </s.StyledLink>
+              {/* <s.StyledLinkTwi
+                target={"_blank"}
+                href={"https://twitter.com/guild_ntp_oa"}
+              >
+                
+              </s.StyledLinkTwi> */}
+            </s.Container>
           </s.Container>
-          <s.SpacerLarge />
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            {/* <StyledImg
-              alt={"right_side"}
-              src={"/config/images/right_side.png"}
-              style={{
-                padding: 24,
-                backgroundColor: "var(--primary)",
-                // transform: "scaleX(-1)",
-              }}
-            /> */}
-          </s.Container>
-        </ResponsiveWrapper>
-        <s.SpacerMedium />
-        <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          ></s.TextDescription>
-          <s.SpacerSmall />
-          <s.TextDescription
-            style={{
-              textAlign: "center",
-              color: "var(--primary-text)",
-            }}
-          ></s.TextDescription>
-          <StyledLinkTwi
-            target={"_blank"}
-            href={"https://twitter.com/test"}
-          >
-            @twitter_account_test
-          </StyledLinkTwi>
-          <s.TextTitle
-            style={{ textAlign: "center", color: "var(--accent-text)" }}
-          ></s.TextTitle>
-        </s.Container>
+        </s.ResponsiveWrapper>
       </s.Container>
     </s.Screen>
   );
