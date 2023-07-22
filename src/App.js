@@ -200,7 +200,7 @@ function App() {
         style={{ padding: 24, backgroundColor: "rgba(0,0,0,0)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
-        <s.StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+        <s.StyledKeyImg alt={"logo"} src={"/config/images/key_vid.png"} />
         <s.SpacerSmall />
         <s.ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container
@@ -215,7 +215,7 @@ function App() {
               // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            <s.StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
+            
 
             <s.TextTitle
             // style={{ textAlign: "center" }}
@@ -228,7 +228,8 @@ function App() {
               <br class={"sp-only"} />
               皆様の楽しいNFT活動を応援しています。
             </s.TextTitle>
-            <s.SpacerSmall />
+            <s.SpacerMedium />
+            <s.StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
             <s.TextTitle
               style={{
                 textAlign: "center",

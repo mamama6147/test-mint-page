@@ -186,6 +186,13 @@ export const StyledLogo = styled.img`
   transition: height 0.5s;
 `;
 
+export const StyledKeyImg = styled.img`
+max-width: 600px;
+width 100%;
+transition: width 0.1s;
+transition: height 0.5s;
+`;
+
 export const StyledImg = styled.img`
   border: 4px var(--secondary);
   background-color: var(--accent);
