@@ -1,0 +1,43 @@
+{
+  "name": "Your Collection #2",
+  "description": "Remember to replace this description",
+  "image": "ipfs://NewUriToReplace/2.png",
+  "dna": "fe57454eb5aefb0214070608a5acba2134fc4f2d",
+  "edition": 2,
+  "date": 1690009015255,
+  "attributes": [
+    {
+      "trait_type": "bg",
+      "value": "Green"
+    },
+    {
+      "trait_type": "skin",
+      "value": "Dark"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "eye",
+      "value": "Joyful"
+    },
+    {
+      "trait_type": "clothes",
+      "value": "Op shoulder jk RE"
+    },
+    {
+      "trait_type": "hair",
+      "value": "Braid BK"
+    },
+    {
+      "trait_type": "accessories",
+      "value": "Survival 2 GY"
+    },
+    {
+      "trait_type": "mask",
+      "value": "Dragon BK"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

@@ -14,7 +14,9 @@ function App() {
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
-  const [feedback, setFeedback] = useState(`Push mint bottun to get Becha.`);
+  const [feedback, setFeedback] = useState(
+    `Mintボタン を押して NTPC をゲットしよう.`
+  );
   const [mintAmount, setMintAmount] = useState(1);
   const [mintAmountAl, setMintAmountAl] = useState(1);
   const [minted, setminted] = useState(0);
@@ -47,12 +49,16 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * amount);
     let totalGasLimit = String(gasLimit * amount);
+    let proof = "";
+
+    // TODO proofの計算処理を追加
+
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`${CONFIG.NFT_NAME} minting...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .preMint(amount)
+      .whitelistMint(amount, proof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -108,21 +114,25 @@ function App() {
   };
 
   const checkAl = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      blockchain.smartContract.methods
-        .Allowlists(blockchain.account)
-        .call()
-        .then((receipt) => {
-          setal(receipt);
-          // dispatch(fetchData(blockchain.account));
-        });
-    }
+    let proof = "";
+
+    // TODO proofの計算処理を追加
+
+    // if (blockchain.account !== "" && blockchain.smartContract !== null) {
+    //   blockchain.smartContract.methods
+    //     .isWhitelisted(blockchain.account, proof)
+    //     .call()
+    //     .then((receipt) => {
+    //       setal(receipt);
+    //       // dispatch(fetchData(blockchain.account));
+    //     });
+    // }
   };
 
   const checkMinted = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       blockchain.smartContract.methods
-        .Minted(blockchain.account)
+        .psMinted(blockchain.account)
         .call()
         .then((receipt) => {
           setminted(receipt);
@@ -215,8 +225,6 @@ function App() {
               // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            
-
             <s.TextTitle
             // style={{ textAlign: "center" }}
             >
@@ -256,18 +264,21 @@ function App() {
             </s.TextDescription>
             <s.SpacerSmall />
             <s.TextTitle style={{ textAlign: "center" }}>
-              オーダーミント期間: <br class={"sp-only"} />
-              2023/08/14 21:00 ~ 08/20 21:00 （6日間）
+              販売スケジュール
+            </s.TextTitle>
+            <s.TextDescription style={{ textAlign: "center" }}>
+              オーダーセール期間: <br class={"sp-only"} />
+              2023/10/14 21:00 ~ 10/20 21:00 （7日間）
               <br />
               <s.SpacerXSmall />
-              パブリックミント期間: <br class={"sp-only"} />
-              2023/08/20 21:00 ~ <br />
+              パブリックセール期間: <br class={"sp-only"} />
+              2023/10/20 21:00 ~ <br />
               <s.SpacerXSmall />
               リビール: <br class={"sp-only"} />
-              2023/08/27 21:00
+              2023/10/27 21:00
               <br />
-            </s.TextTitle>
-            <s.SpacerSmall />
+            </s.TextDescription>
+            <s.SpacerMedium />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
               <>
                 <s.TextTitle
@@ -296,22 +307,20 @@ function App() {
                   価格
                 </s.TextTitle>
                 <s.SpacerXSmall />
-
-                <s.TextTitle style={{ textAlign: "center" }}>
+                <s.TextSubTitle style={{ textAlign: "center" }}>
                   {"オーダーミント: "}
                   {CONFIG.DISPLAY_COST_AL}
                   {CONFIG.NETWORK.SYMBOL}
-                </s.TextTitle>
-                <s.TextTitle style={{ textAlign: "center" }}>
+                </s.TextSubTitle>
+                <s.TextSubTitle style={{ textAlign: "center" }}>
                   {"パブリックミント: "}
                   {CONFIG.DISPLAY_COST}
                   {CONFIG.NETWORK.SYMBOL}
-                </s.TextTitle>
-                <s.SpacerXSmall />
+                </s.TextSubTitle>
                 <s.TextDescription style={{ textAlign: "center" }}>
                   + ガス代
                 </s.TextDescription>
-                <s.SpacerXSmall />
+                <s.SpacerMedium />
                 {blockchain.account === "" ||
                 blockchain.smartContract === null ? (
                   <s.Container ai={"center"} jc={"center"}>
@@ -340,6 +349,10 @@ function App() {
                   </s.Container>
                 ) : (
                   <>
+                    <s.TextTitle style={{ textAlign: "center" }}>
+                      ミントメニュー
+                    </s.TextTitle>
+                    <s.SpacerXSmall />
                     <s.TextDescription
                       style={{
                         textAlign: "center",
@@ -347,17 +360,8 @@ function App() {
                     >
                       {feedback}
                     </s.TextDescription>
-                    <s.TextTitle
-                      style={{
-                        textAlign: "center",
-                      }}
-                    >
-                      {""}
-                      {minted}
-                      {" / 2 minted"}
-                    </s.TextTitle>
 
-                    <s.SpacerMedium />
+                    <s.SpacerSmall />
                     <s.Container>
                       {/* ALチェックここから */}
                       {al > 0 ? ( //AL所有確認
@@ -478,10 +482,12 @@ function App() {
                               textAlign: "center",
                             }}
                           >
-                            {"You don't have Allowlist."}
+                            {"あなたはプレオーダーミントの対象ではありません."}
                           </s.TextDescription>
                         </s.Container>
-                      )}
+                      )
+                      }
+                      <s.SpacerMedium />
                       {/* ALチェックここまで */}
 
                       {/* PSここから */}
@@ -501,21 +507,34 @@ function App() {
                                     e.preventDefault();
                                   }}
                                 >
-                                  {"Your 2 mint is done."}
+                                  {"最大枚数をミント済みです."}
                                 </s.StyledButtonPS>
                               </s.Container>
                             </>
                           ) : (
                             //残りミント可能枠有り
                             <>
-                              <s.SpacerMedium />
                               <s.Container>
                                 <s.Container
                                   ai={"center"}
                                   jc={"center"}
                                   fd={"row"}
                                 >
-                                  <s.SpacerXSmall />
+                                  <s.TextTitle
+                                    style={{
+                                      textAlign: "center",
+                                    }}
+                                  >
+                                    パブリックセール<br class={"sp-only"} /> {minted} / 10 ミント済
+                                  </s.TextTitle>
+                                  <s.SpacerSmall />
+                                </s.Container>
+                                <s.Container
+                                  ai={"center"}
+                                  jc={"center"}
+                                  fd={"row"}
+                                >
+                                  <s.SpacerMedium />
                                   <s.StyledRoundButton
                                     style={{ lineHeight: 0.4 }}
                                     disabled={claimingNft ? 1 : 0}
@@ -584,13 +603,20 @@ function App() {
                 )}
               </>
             )}
-            <s.SpacerMedium />
+            <s.SpacerLarge />
+            <s.TextDescription style={{ textAlign: "center" }}>
+              外部リンク
+            </s.TextDescription>
+            <s.SpacerXSmall />
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
               <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
                 {CONFIG.MARKETPLACE}
               </s.StyledLink>
               <s.SpacerXSmall />
-              <s.StyledLink target={"_blank"} href={"https://twitter.com/guild_ntp_oa"}>
+              <s.StyledLink
+                target={"_blank"}
+                href={"https://twitter.com/guild_ntp_oa"}
+              >
                 @guild_ntp_oa
               </s.StyledLink>
               {/* <s.StyledLinkTwi

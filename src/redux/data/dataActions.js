@@ -27,15 +27,15 @@ export const fetchData = (account) => {
     try {
       let totalSupply = await store
         .getState()
-        .blockchain.smartContract.methods.tokenCount()
+        .blockchain.smartContract.methods.totalSupply()
         .call();
         let alSaleStart = await store
         .getState()
-        .blockchain.smartContract.methods.presale()
+        .blockchain.smartContract.methods.isWlSaleEnabled()
         .call();
         let saleStart = await store
         .getState()
-        .blockchain.smartContract.methods.publicsale()
+        .blockchain.smartContract.methods.isPublicSaleEnabled()
         .call();
 
 

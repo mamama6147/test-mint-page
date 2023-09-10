@@ -1,0 +1,43 @@
+{
+  "name": "Your Collection #7",
+  "description": "Remember to replace this description",
+  "image": "ipfs://NewUriToReplace/7.png",
+  "dna": "aab59de914bf3242f245f4632bf8295006a6f98d",
+  "edition": 7,
+  "date": 1690009023258,
+  "attributes": [
+    {
+      "trait_type": "bg",
+      "value": "Beige"
+    },
+    {
+      "trait_type": "skin",
+      "value": "Gray"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "eye",
+      "value": "Cateye"
+    },
+    {
+      "trait_type": "clothes",
+      "value": "Gentangle"
+    },
+    {
+      "trait_type": "hair",
+      "value": "Braid GR"
+    },
+    {
+      "trait_type": "accessories",
+      "value": "Bandage"
+    },
+    {
+      "trait_type": "mask",
+      "value": "Bug Goggles BL"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

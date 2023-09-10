@@ -1,0 +1,43 @@
+{
+  "name": "Your Collection #6",
+  "description": "Remember to replace this description",
+  "image": "ipfs://NewUriToReplace/6.png",
+  "dna": "15070d5b43884eb4ffeaecdbbc133c193625f84c",
+  "edition": 6,
+  "date": 1690009021092,
+  "attributes": [
+    {
+      "trait_type": "bg",
+      "value": "Green"
+    },
+    {
+      "trait_type": "skin",
+      "value": "Light"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "Smile"
+    },
+    {
+      "trait_type": "eye",
+      "value": "Joyful"
+    },
+    {
+      "trait_type": "clothes",
+      "value": "T shirt love"
+    },
+    {
+      "trait_type": "hair",
+      "value": "Ponytail A WH"
+    },
+    {
+      "trait_type": "accessories",
+      "value": "Survival GY"
+    },
+    {
+      "trait_type": "mask",
+      "value": "WOLF BE"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}

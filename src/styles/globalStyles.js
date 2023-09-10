@@ -52,7 +52,7 @@ export const Container = styled.div`
 
 export const TextTitle = styled.p`
   color: var(--primary-text);
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 500;
   line-height: 1.6;
   font-family: 'kfhimaji';
@@ -63,6 +63,7 @@ export const TextSubTitle = styled.p`
   color: var(--primary-text);
   font-size: 18px;
   line-height: 1.6;
+  font-family: 'kfhimaji';
 `;
 
 export const TextDescription = styled.p`
@@ -148,7 +149,7 @@ export const StyledRoundButton = styled.button`
   padding: 10px;
   font-weight: bold;
   font-size: 15px;
-  color: var(--primary-text);
+  color: white;
   width: 30px;
   height: 30px;
   cursor: pointer;

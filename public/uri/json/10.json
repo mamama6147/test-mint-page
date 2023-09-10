@@ -1,0 +1,43 @@
+{
+  "name": "Your Collection #10",
+  "description": "Remember to replace this description",
+  "image": "ipfs://NewUriToReplace/10.png",
+  "dna": "d2ee96b804d6800fddc8dd853cbaacd5fa9f356b",
+  "edition": 10,
+  "date": 1690009032196,
+  "attributes": [
+    {
+      "trait_type": "bg",
+      "value": "Off white"
+    },
+    {
+      "trait_type": "skin",
+      "value": "Light"
+    },
+    {
+      "trait_type": "mouth",
+      "value": "Surprised"
+    },
+    {
+      "trait_type": "eye",
+      "value": "Pure"
+    },
+    {
+      "trait_type": "clothes",
+      "value": "Graffiti Face"
+    },
+    {
+      "trait_type": "hair",
+      "value": "Spiky GR"
+    },
+    {
+      "trait_type": "accessories",
+      "value": "Bandage"
+    },
+    {
+      "trait_type": "mask",
+      "value": "Inari RE"
+    }
+  ],
+  "compiler": "HashLips Art Engine"
+}
