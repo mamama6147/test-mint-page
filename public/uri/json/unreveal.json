@@ -1,43 +1,42 @@
 {
-  "name": "Your Collection #1",
-  "description": "Remember to replace this description",
-  "image": "https://ntpc-mint-page.pages.dev/uri/img/1.png",
+  "name": "NeoTokyoPunksCartoon #???",
+  "description": "RNeoTokyoPunksCartoon is not revealed.",
+  "image": "https://ntpc-mint-page.pages.dev/uri/img/unreveal.png",
   "dna": "0d406b42d383b8a16980f4aec720f4da7fc1fd75",
   "edition": 1,
   "date": 1690009013645,
   "attributes": [
     {
       "trait_type": "bg",
-      "value": "Green"
+      "value": "?"
     },
     {
       "trait_type": "skin",
-      "value": "Sunset"
+      "value": "?"
     },
     {
       "trait_type": "mouth",
-      "value": "Pink"
+      "value": "?"
     },
     {
       "trait_type": "eye",
-      "value": "Cateye"
+      "value": "?"
     },
     {
       "trait_type": "clothes",
-      "value": "Hooded sw fire"
+      "value": "?"
     },
     {
       "trait_type": "hair",
-      "value": "Perm BR"
+      "value": "?"
     },
     {
       "trait_type": "accessories",
-      "value": "Survival 2 GY"
+      "value": "?"
     },
     {
       "trait_type": "mask",
-      "value": "Butterfly BL"
+      "value": "?"
     }
-  ],
-  "compiler": "HashLips Art Engine"
+  ]
 }

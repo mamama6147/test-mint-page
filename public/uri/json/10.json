@@ -1,7 +1,7 @@
 {
   "name": "Your Collection #10",
   "description": "Remember to replace this description",
-  "image": "ipfs://NewUriToReplace/10.png",
+  "image": "https://ntpc-mint-page.pages.dev/uri/img/10.png",
   "dna": "d2ee96b804d6800fddc8dd853cbaacd5fa9f356b",
   "edition": 10,
   "date": 1690009032196,

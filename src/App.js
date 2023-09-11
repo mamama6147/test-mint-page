@@ -132,7 +132,7 @@ function App() {
   const checkMinted = () => {
     if (blockchain.account !== "" && blockchain.smartContract !== null) {
       blockchain.smartContract.methods
-        .psMinted(blockchain.account)
+        .claimed(blockchain.account)
         .call()
         .then((receipt) => {
           setminted(receipt);
@@ -207,11 +207,10 @@ function App() {
       <s.Container
         flex={1}
         ai={"center"}
-        style={{ padding: 24, backgroundColor: "rgba(0,0,0,0)" }}
+        style={{ padding: 20, backgroundColor: "rgba(0,0,0,0)" }}
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <s.StyledKeyImg alt={"logo"} src={"/config/images/key_vid.png"} />
-        <s.SpacerSmall />
         <s.ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
           <s.Container
             flex={2}
@@ -225,7 +224,7 @@ function App() {
               // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
-            <s.TextTitle
+            <s.TextSubTitle
             // style={{ textAlign: "center" }}
             >
               Neo Tokhyo Punks Cartoonは、
@@ -235,8 +234,8 @@ function App() {
               ギルドメンバーをはじめ、
               <br class={"sp-only"} />
               皆様の楽しいNFT活動を応援しています。
-            </s.TextTitle>
-            <s.SpacerMedium />
+            </s.TextSubTitle>
+            <s.SpacerLarge />
             <s.StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
             <s.TextTitle
               style={{
@@ -246,7 +245,7 @@ function App() {
                 // color: "var(--accent-text)",
               }}
             >
-              <s.SpacerXSmall />
+              <s.SpacerMedium />
               <s.TextDescription
                 style={{ textAlign: "center" }}
               ></s.TextDescription>
@@ -591,7 +590,7 @@ function App() {
                         <>
                           <s.Container ai={"center"} jc={"center"} fd={"row"}>
                             <s.TextDescription>
-                              {"PS ComingSoon."}
+                              {"Public Sale ComingSoon."}
                             </s.TextDescription>
                           </s.Container>
                         </>

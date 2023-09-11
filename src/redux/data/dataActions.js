@@ -31,11 +31,11 @@ export const fetchData = (account) => {
         .call();
         let alSaleStart = await store
         .getState()
-        .blockchain.smartContract.methods.isWlSaleEnabled()
+        .blockchain.smartContract.methods.preSaleStart()
         .call();
         let saleStart = await store
         .getState()
-        .blockchain.smartContract.methods.isPublicSaleEnabled()
+        .blockchain.smartContract.methods.pubSaleStart()
         .call();
 
 
