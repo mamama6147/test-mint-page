@@ -305,7 +305,6 @@ function App() {
                   {/* 1 {CONFIG.SYMBOL}  */}
                   価格
                 </s.TextTitle>
-                <s.SpacerXSmall />
                 <s.TextSubTitle style={{ textAlign: "center" }}>
                   {"オーダーミント: "}
                   {CONFIG.DISPLAY_COST_AL}
