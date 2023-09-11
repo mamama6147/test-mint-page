@@ -16,5 +16,6 @@
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
   "MARKETPLACE_LINK": "",
+  "MERKLEPROOF": "",
   "SHOW_BACKGROUND": false
 }

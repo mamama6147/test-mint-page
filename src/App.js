@@ -58,7 +58,7 @@ function App() {
     setFeedback(`${CONFIG.NFT_NAME} minting...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .whitelistMint(amount, proof)
+      .preMint(amount, proof)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -91,7 +91,7 @@ function App() {
     setFeedback(`${CONFIG.NFT_NAME} minting...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .publicMint(amount)
+      .pubMint(amount)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
