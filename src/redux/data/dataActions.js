@@ -38,7 +38,6 @@ export const fetchData = (account) => {
         .blockchain.smartContract.methods.pubSaleStart()
         .call();
 
-
       dispatch(
         fetchDataSuccess({
           totalSupply,

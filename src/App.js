@@ -10,6 +10,20 @@ const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
 function App() {
+  // MerkleProof
+  let { MerkleTree } = require("merkletreejs");
+  let keccak256 = require("keccak256");
+
+  const allowlist = require("./allowlist.json");
+
+  // マークルツリー生成
+  const hashedAddresses = allowlist.map((addr) => keccak256(addr));
+  const merkleTree = new MerkleTree(hashedAddresses, keccak256, {
+    sortPairs: true,
+  });
+  // マークルルートを生成
+  const merkleRoot = merkleTree.getHexRoot();
+
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
   const data = useSelector((state) => state.data);
@@ -20,6 +34,7 @@ function App() {
   const [mintAmount, setMintAmount] = useState(1);
   const [mintAmountAl, setMintAmountAl] = useState(1);
   const [minted, setminted] = useState(0);
+  const [mintedAl, setmintedAl] = useState(0);
   const [al, setal] = useState(false);
 
   const [CONFIG, SET_CONFIG] = useState({
@@ -49,13 +64,13 @@ function App() {
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * amount);
     let totalGasLimit = String(gasLimit * amount);
-    let proof = "";
+    let proof = merkleTree.getHexProof(keccak256(blockchain.account));
 
     // TODO proofの計算処理を追加
-
+    console.log("ClaimMFTs at preSale: ", totalCostWei);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`${CONFIG.NFT_NAME} minting...`);
+    setFeedback(`${CONFIG.NFT_NAME} プレオーダーミント中...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .preMint(amount, proof)
@@ -74,21 +89,24 @@ function App() {
       .then((receipt) => {
         console.log(receipt);
         setFeedback(`${CONFIG.NFT_NAME} mint success! Check your wallet.`);
-        setClaimingNft(true);
+        setClaimingNft(false);
         checkMinted();
+        checkMintedAl();
         // dispatch(fetchData(blockchain.account));
       });
   };
 
   const claimNFTsPS = () => {
     let cost = CONFIG.WEI_COST;
-    let amount = mintAmount;
+    let amount = mintAmountAl;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * amount);
     let totalGasLimit = String(gasLimit * amount);
+
+    console.log("ClaimMFTs at pubSale: ", totalCostWei);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`${CONFIG.NFT_NAME} minting...`);
+    setFeedback(`${CONFIG.NFT_NAME} プレセールミント中...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .pubMint(amount)
@@ -109,24 +127,19 @@ function App() {
         setFeedback(`${CONFIG.NFT_NAME} mint success! Check your wallet.`);
         setClaimingNft(false);
         checkMinted();
+        checkMintedAl();
         // dispatch(fetchData(blockchain.account));
       });
   };
 
   const checkAl = () => {
-    let proof = "";
-
-    // TODO proofの計算処理を追加
-
-    // if (blockchain.account !== "" && blockchain.smartContract !== null) {
-    //   blockchain.smartContract.methods
-    //     .isWhitelisted(blockchain.account, proof)
-    //     .call()
-    //     .then((receipt) => {
-    //       setal(receipt);
-    //       // dispatch(fetchData(blockchain.account));
-    //     });
-    // }
+    // マークルプルーフを生成
+    let proof = merkleTree.getHexProof(keccak256(blockchain.account));
+    if (proof.length >= 1) {
+      setal(true);
+    } else {
+      setal(false);
+    }
   };
 
   const checkMinted = () => {
@@ -136,6 +149,18 @@ function App() {
         .call()
         .then((receipt) => {
           setminted(receipt);
+          dispatch(fetchData(blockchain.account));
+        });
+    }
+  };
+
+  const checkMintedAl = () => {
+    if (blockchain.account !== "" && blockchain.smartContract !== null) {
+      blockchain.smartContract.methods
+        .claimedAl(blockchain.account)
+        .call()
+        .then((receipt) => {
+          setmintedAl(receipt);
           dispatch(fetchData(blockchain.account));
         });
     }
@@ -151,8 +176,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 2 - minted) {
-      newMintAmount = 2 - minted;
+    if (newMintAmount > 10 - minted) {
+      newMintAmount = 10 - minted;
     }
     setMintAmount(newMintAmount);
   };
@@ -162,13 +187,16 @@ function App() {
     if (newMintAmount < 1) {
       newMintAmount = 1;
     }
+    if (newMintAmount > 2 - mintedAl) {
+      newMintAmount = 2 - mintedAl;
+    }
     setMintAmountAl(newMintAmount);
   };
 
   const incrementMintAmountAl = () => {
     let newMintAmount = mintAmountAl + 1;
-    if (newMintAmount > 2 - minted) {
-      newMintAmount = 2 - minted;
+    if (newMintAmount > 2 - mintedAl) {
+      newMintAmount = 2 - mintedAl;
     }
     setMintAmountAl(newMintAmount);
   };
@@ -193,12 +221,14 @@ function App() {
   useEffect(() => {
     getConfig();
     checkMinted();
+    checkMintedAl();
     checkAl();
   }, []);
 
   useEffect(() => {
     getData();
     checkMinted();
+    checkMintedAl();
     checkAl();
   }, [blockchain.account]);
 
@@ -251,16 +281,6 @@ function App() {
               ></s.TextDescription>
               {data.totalSupply} / {CONFIG.MAX_SUPPLY}
             </s.TextTitle>
-            <s.TextDescription
-              style={{
-                textAlign: "center",
-                // color: "var(--primary-text)",
-              }}
-            >
-              <s.StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
-              </s.StyledLink>
-            </s.TextDescription>
             <s.SpacerSmall />
             <s.TextTitle style={{ textAlign: "center" }}>
               販売スケジュール
@@ -283,7 +303,7 @@ function App() {
                 <s.TextTitle
                   style={{ textAlign: "center", color: "var(--accent-text)" }}
                 >
-                  {CONFIG.NFT_NAME} sold out. Thank you.
+                  {CONFIG.NFT_NAME} 完売御礼！
                 </s.TextTitle>
                 <s.TextDescription style={{ textAlign: "center" }}>
                   You can still find {CONFIG.NFT_NAME} on
@@ -295,16 +315,7 @@ function App() {
               </>
             ) : (
               <>
-                {/* <s.TextTitle
-                  style={{ textAlign: "center", }}
-                >
-                  {"You can 2 mint Per wallet."}
-                </s.TextTitle>
-                <br /> */}
-                <s.TextTitle style={{ textAlign: "center" }}>
-                  {/* 1 {CONFIG.SYMBOL}  */}
-                  価格
-                </s.TextTitle>
+                <s.TextTitle style={{ textAlign: "center" }}>価格</s.TextTitle>
                 <s.TextSubTitle style={{ textAlign: "center" }}>
                   {"オーダーミント: "}
                   {CONFIG.DISPLAY_COST_AL}
@@ -366,27 +377,50 @@ function App() {
                         <>
                           {data.alSaleStart ? ( // セール開始前
                             <>
-                              {minted >= 2 ? ( //ミント済確認
+                              {mintedAl >= 2 ? ( //ミント済確認
                                 <>
                                   <s.Container
                                     ai={"center"}
                                     jc={"center"}
                                     fd={"row"}
                                   >
-                                    <s.StyledButton
+                                    <s.TextSubTitle
+                                      style={{
+                                        textAlign: "center",
+                                      }}
+                                    >
+                                      プレオーダーミント数の上限に達しました.
+                                    </s.TextSubTitle>
+                                    {/* <s.StyledButton
                                       disabled={1} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                       onClick={(e) => {
                                         e.preventDefault();
                                       }}
                                     >
-                                      {"Your 2 mint is done."}
-                                    </s.StyledButton>
+                                      {"Your Al mint is done."}
+                                    </s.StyledButton> */}
                                   </s.Container>
                                 </>
                               ) : (
                                 //残りミント可能枠有り
                                 <>
-                                  <s.SpacerMedium />
+                                  {/* <s.SpacerMedium /> */}
+                                  <s.Container
+                                    ai={"center"}
+                                    jc={"center"}
+                                    fd={"row"}
+                                  >
+                                    <s.TextSubTitle
+                                      style={{
+                                        textAlign: "center",
+                                      }}
+                                    >
+                                      プレオーダー
+                                      <br class={"sp-only"} /> {mintedAl} / 2
+                                      ミント済
+                                    </s.TextSubTitle>
+                                    <s.SpacerSmall />
+                                  </s.Container>
                                   <s.Container>
                                     <s.Container
                                       ai={"center"}
@@ -410,7 +444,7 @@ function App() {
                                           textAlign: "center",
                                         }}
                                       >
-                                        {mintAmount}
+                                        {mintAmountAl}
                                       </s.TextDescription>
                                       <s.SpacerMedium />
                                       <s.StyledRoundButton
@@ -438,7 +472,9 @@ function App() {
                                         getData();
                                       }}
                                     >
-                                      {claimingNft ? "Minting..." : "AL Mint"}
+                                      {claimingNft
+                                        ? "ミント中..."
+                                        : "ミント開始"}
                                     </s.StyledButton>
                                   </s.Container>
                                 </>
@@ -483,15 +519,14 @@ function App() {
                             {"あなたはプレオーダーミントの対象ではありません."}
                           </s.TextDescription>
                         </s.Container>
-                      )
-                      }
+                      )}
                       <s.SpacerMedium />
                       {/* ALチェックここまで */}
 
                       {/* PSここから */}
                       {data.saleStart ? ( //PS開始チェック
                         <>
-                          {minted >= 2 ? ( //ミント済確認
+                          {minted >= 10 ? ( //ミント済確認
                             <>
                               <s.SpacerMedium />
                               <s.Container
@@ -518,13 +553,15 @@ function App() {
                                   jc={"center"}
                                   fd={"row"}
                                 >
-                                  <s.TextTitle
+                                  <s.TextSubTitle
                                     style={{
                                       textAlign: "center",
                                     }}
                                   >
-                                    パブリックセール<br class={"sp-only"} /> {minted} / 10 ミント済
-                                  </s.TextTitle>
+                                    パブリックセール
+                                    <br class={"sp-only"} /> {minted} / 10
+                                    ミント済
+                                  </s.TextSubTitle>
                                   <s.SpacerSmall />
                                 </s.Container>
                                 <s.Container
@@ -577,7 +614,7 @@ function App() {
                                     getData();
                                   }}
                                 >
-                                  {claimingNft ? "Minting..." : "PS Mint"}
+                                  {claimingNft ? "ミント中..." : "ミント開始"}
                                 </s.StyledButtonPS>
                               </s.Container>
                               {minted > 0 ? <></> : <></>}
@@ -609,6 +646,11 @@ function App() {
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
               <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
                 {CONFIG.MARKETPLACE}
+              </s.StyledLink>
+              <s.SpacerXSmall />
+              <s.StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
+                {/* {truncate(CONFIG.CONTRACT_ADDRESS, 15)} */}
+                Etherscan
               </s.StyledLink>
               <s.SpacerXSmall />
               <s.StyledLink
