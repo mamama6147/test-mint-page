@@ -29,7 +29,7 @@ function App() {
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(
-    `Mintボタン を押して NTPC をゲットしよう.`
+    `ボタンを押して NTPC をミントしよう.`
   );
   const [mintAmount, setMintAmount] = useState(1);
   const [mintAmountAl, setMintAmountAl] = useState(1);
@@ -66,7 +66,6 @@ function App() {
     let totalGasLimit = String(gasLimit * amount);
     let proof = merkleTree.getHexProof(keccak256(blockchain.account));
 
-    // TODO proofの計算処理を追加
     console.log("ClaimMFTs at preSale: ", totalCostWei);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
@@ -83,12 +82,12 @@ function App() {
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Mint failed. Try again.");
+        setFeedback("プレオーダーミントに失敗しました.");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
-        setFeedback(`${CONFIG.NFT_NAME} mint success! Check your wallet.`);
+        setFeedback(`プレオーダーミントが成功しました!`);
         setClaimingNft(false);
         checkMinted();
         checkMintedAl();
@@ -98,7 +97,7 @@ function App() {
 
   const claimNFTsPS = () => {
     let cost = CONFIG.WEI_COST;
-    let amount = mintAmountAl;
+    let amount = mintAmount;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * amount);
     let totalGasLimit = String(gasLimit * amount);
@@ -106,7 +105,7 @@ function App() {
     console.log("ClaimMFTs at pubSale: ", totalCostWei);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`${CONFIG.NFT_NAME} プレセールミント中...`);
+    setFeedback(`${CONFIG.NFT_NAME} ミント中...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
       .pubMint(amount)
@@ -119,12 +118,12 @@ function App() {
       })
       .once("error", (err) => {
         console.log(err);
-        setFeedback("Mint failed. Try again.");
+        setFeedback("ミントに失敗しました.");
         setClaimingNft(false);
       })
       .then((receipt) => {
         console.log(receipt);
-        setFeedback(`${CONFIG.NFT_NAME} mint success! Check your wallet.`);
+        setFeedback(`ミントに成功しました!`);
         setClaimingNft(false);
         checkMinted();
         checkMintedAl();
@@ -305,12 +304,8 @@ function App() {
                 >
                   {CONFIG.NFT_NAME} 完売御礼！
                 </s.TextTitle>
-                <s.TextDescription style={{ textAlign: "center" }}>
-                  You can still find {CONFIG.NFT_NAME} on
-                </s.TextDescription>
-                <s.SpacerSmall />
                 <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                  {CONFIG.MARKETPLACE}
+                  {CONFIG.MARKETPLACE} で {CONFIG.NFT_NAME} を探す
                 </s.StyledLink>
               </>
             ) : (
@@ -369,13 +364,12 @@ function App() {
                     >
                       {feedback}
                     </s.TextDescription>
-
                     <s.SpacerSmall />
                     <s.Container>
                       {/* ALチェックここから */}
                       {al > 0 ? ( //AL所有確認
                         <>
-                          {data.alSaleStart ? ( // セール開始前
+                          {data.alSaleStart ? ( // セール開始チェック
                             <>
                               {mintedAl >= 2 ? ( //ミント済確認
                                 <>
@@ -389,22 +383,13 @@ function App() {
                                         textAlign: "center",
                                       }}
                                     >
-                                      プレオーダーミント数の上限に達しました.
+                                      最大枚数ミント済
                                     </s.TextSubTitle>
-                                    {/* <s.StyledButton
-                                      disabled={1} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                      }}
-                                    >
-                                      {"Your Al mint is done."}
-                                    </s.StyledButton> */}
                                   </s.Container>
                                 </>
                               ) : (
                                 //残りミント可能枠有り
                                 <>
-                                  {/* <s.SpacerMedium /> */}
                                   <s.Container
                                     ai={"center"}
                                     jc={"center"}
@@ -421,13 +406,27 @@ function App() {
                                     </s.TextSubTitle>
                                     <s.SpacerSmall />
                                   </s.Container>
+                                  <s.Container
+                                    ai={"center"}
+                                    jc={"center"}
+                                  >
+                                    <s.TextDescription
+                                      style={{
+                                        textAlign: "center",
+                                      }}
+                                    >
+                                      ※ 必ず事前にオーダーした枚数のみ<br class={"sp-only"} />ミントするようにしてください.<br />
+                                      ※ 誤って余分にミントしてしまった場合、<br />余剰分はランダムデザインで補填しますが、<br/>
+                                      差額の保証は致しません.
+                                    </s.TextDescription>
+                                  </s.Container>
                                   <s.Container>
+                                    <s.SpacerSmall />
                                     <s.Container
                                       ai={"center"}
                                       jc={"center"}
                                       fd={"row"}
                                     >
-                                      <s.SpacerXSmall />
                                       <s.StyledRoundButton
                                         style={{ lineHeight: 0.4 }}
                                         disabled={claimingNft ? 1 : 0}
@@ -493,7 +492,7 @@ function App() {
                                 //  ,
                                 // }}
                                 >
-                                  {"You are registerd in AL."}
+                                  {"あなたはプレオーダーミントの対象です."}
                                 </s.TextDescription>
                               </s.Container>
                               <s.Container
@@ -502,7 +501,7 @@ function App() {
                                 fd={"row"}
                               >
                                 <s.TextDescription>
-                                  {"ComingSoon."}
+                                  {"プレオーダー開始までお待ちください."}
                                 </s.TextDescription>
                               </s.Container>
                             </>
@@ -540,7 +539,9 @@ function App() {
                                     e.preventDefault();
                                   }}
                                 >
-                                  {"最大枚数をミント済みです."}
+                                  {
+                                    "最大枚数ミント済"
+                                  }
                                 </s.StyledButtonPS>
                               </s.Container>
                             </>
@@ -569,7 +570,6 @@ function App() {
                                   jc={"center"}
                                   fd={"row"}
                                 >
-                                  <s.SpacerMedium />
                                   <s.StyledRoundButton
                                     style={{ lineHeight: 0.4 }}
                                     disabled={claimingNft ? 1 : 0}
@@ -626,7 +626,7 @@ function App() {
                         <>
                           <s.Container ai={"center"} jc={"center"} fd={"row"}>
                             <s.TextDescription>
-                              {"Public Sale ComingSoon."}
+                              {"パブリックセール開始までお待ちください."}
                             </s.TextDescription>
                           </s.Container>
                         </>
