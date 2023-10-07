@@ -240,7 +240,7 @@ function App() {
         image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
       >
         <s.StyledKeyImg alt={"logo"} src={"/config/images/key_vid.png"} />
-        <s.ResponsiveWrapper flex={1} style={{ padding: 24 }} test>
+        <s.ResponsiveWrapper flex={1} style={{ padding: 10 }} test>
           <s.Container
             flex={2}
             jc={"center"}
@@ -253,6 +253,12 @@ function App() {
               // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
             }}
           >
+            <s.TextTitle
+            style={{ textAlign: "center" }}
+            >
+              Neo Tokyo Punks Cartoon
+            </s.TextTitle>
+            <s.SpacerSmall />
             <s.TextSubTitle
             // style={{ textAlign: "center" }}
             >
