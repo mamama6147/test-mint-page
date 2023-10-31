@@ -262,7 +262,7 @@ function App() {
             <s.TextSubTitle
             // style={{ textAlign: "center" }}
             >
-              Neo Tokhyo Punks Cartoonは、
+              Neo Tokyo Punks Cartoonは、
               <br class={"sp-only"} />
               Neo Tokyo Punksのギルドから生まれたコレクションです。
               <br />
