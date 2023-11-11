@@ -292,14 +292,14 @@ function App() {
             </s.TextTitle>
             <s.TextDescription style={{ textAlign: "center" }}>
               オーダーセール期間: <br class={"sp-only"} />
-              2023/10/14 21:00 ~ 10/20 21:00 （7日間）
+              2023/11/11 19:00 ~ 11/19 18:59 （8日間）
               <br />
               <s.SpacerXSmall />
               パブリックセール期間: <br class={"sp-only"} />
-              2023/10/20 21:00 ~ <br />
+              2023/11/19 19:00 ~ 11/25 18:59<br />
               <s.SpacerXSmall />
               リビール: <br class={"sp-only"} />
-              2023/10/27 21:00
+              2023/11/25 19:00頃
               <br />
             </s.TextDescription>
             <s.SpacerMedium />
