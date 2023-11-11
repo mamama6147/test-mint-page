@@ -1,0 +1,39 @@
+{
+  "name": "NEO TOKYO PUNKS CARTOON #???",
+  "description": "2050 年を舞台とする NEO TOKYO PUNKS の世界がもし 1950 年のレトロカートゥーン調で描かれたら―――\n そんなどこか懐かしくて、可愛くて、クールな PUNKS。\n子どものころ大切にしていたおもちゃのように、CARTOON PUNKS をウォレットという宝箱の中にしまいませんか？",
+  "image": "https://ntpc-mint-page.pages.dev/uri/img/unreveal.png",
+  "attributes": [
+    {
+      "trait_type": "BACKGROUND",
+      "value": "?"
+    },
+    {
+      "trait_type": "BODY",
+      "value": "?"
+    },
+    {
+      "trait_type": "MOUTH",
+      "value": "?"
+    },
+    {
+      "trait_type": "ACCESSORIES",
+      "value": "?"
+    },
+    {
+      "trait_type": "EYE",
+      "value": "?"
+    },
+    {
+      "trait_type": "HAIR",
+      "value": "?"
+    },
+    {
+      "trait_type": "CLOTHES",
+      "value": "?"
+    },
+    {
+      "trait_type": "MASK",
+      "value": "?"
+    }
+  ]
+}
