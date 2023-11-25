@@ -291,15 +291,15 @@ function App() {
               販売スケジュール
             </s.TextTitle>
             <s.TextDescription style={{ textAlign: "center" }}>
-              オーダーセール: 終了
-              <br />
+              セール終了
+              {/* <br />
               <s.SpacerXSmall />
               パブリックセール: <br class={"sp-only"} />
               2023/11/19 19:00 ~ 11/25 18:50<br />
               <s.SpacerXSmall />
               リビール: <br class={"sp-only"} />
               2023/11/25 19:00頃
-              <br />
+              <br /> */}
             </s.TextDescription>
             <s.SpacerMedium />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
