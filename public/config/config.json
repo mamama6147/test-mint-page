@@ -1,21 +1,21 @@
 {
-  "CONTRACT_ADDRESS": "0xeb98271dc7781acd791acca7aee8193f44d8c662",
-  "SCAN_LINK": "https://etherscan.io/address/0xeb98271dc7781acd791acca7aee8193f44d8c662",
+  "CONTRACT_ADDRESS": "0x865Df768C7a2184bDd2318330C09a7eD7b3C0C5f",
+  "SCAN_LINK": "https://sepolia.etherscan.io/address/0x865df768c7a2184bdd2318330c09a7ed7b3c0c5f",
   "NETWORK": {
     "NAME": "Ethereum",
-    "SYMBOL": "ETH",
-    "ID": 1
+    "SYMBOL": "SepoliaETH",
+    "ID": 11155111
   },
-  "NFT_NAME": "NeoTokyoPunksCartoon",
-  "SYMBOL": "NTPC",
-  "MAX_SUPPLY": 333,
+  "NFT_NAME": "NsNFT",
+  "SYMBOL": "NNFT",
+  "MAX_SUPPLY": 30,
   "WEI_COST_AL": 10000000000000000,
   "WEI_COST":     5000000000000000,
   "DISPLAY_COST_AL": 0.01,
   "DISPLAY_COST": 0.005,
   "GAS_LIMIT": 285000,
   "MARKETPLACE": "Opeansea",
-  "MARKETPLACE_LINK": "https://opensea.io/collection/neotokyopunkscartoon",
+  "MARKETPLACE_LINK": "",
   "MERKLEPROOF": "",
   "SHOW_BACKGROUND": false
 }

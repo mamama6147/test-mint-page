@@ -101,7 +101,8 @@ export const connect = () => {
             // check if the chain to connect to is installed
             await window.ethereum.request({
               method: 'wallet_switchEthereumChain',
-              params: [{ chainId: '0x1' }], // イーサチェーンのID（16進数）
+              params: [{ chainId: '0xaa36a7' }], // sepoliaチェーンのID（16進数）
+              // params: [{ chainId: '0x1' }], // イーサチェーンのID（16進数）
               // params: [{ chainId: '0x5' }], // Goerli テストネットのID（16進数）
               // params: [{ chainId: '0x4' }], // rinkebyのID（16進数）
               // params: [{ chainId: '0x89' }], // polygonMainのID（16進数）
@@ -114,7 +115,8 @@ export const connect = () => {
                   method: 'wallet_addEthereumChain',
                   params: [
                     {
-                      chainId: '0x1', //イーサ
+                      chainId: '0xaa36a7', // spolia
+                      // chainId: '0x1', //イーサ
                       // chainId: '0x5', //Goerli
                       // chainId: '0x89', //polygonMain
                       // rpcUrl: 'https://mainnet-infura.brave.com/',

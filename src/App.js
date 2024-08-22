@@ -34,8 +34,8 @@ function App() {
   const [mintAmount, setMintAmount] = useState(1);
   const [mintAmountAl, setMintAmountAl] = useState(1);
   const [minted, setminted] = useState(0);
-  const [mintedAl, setmintedAl] = useState(0);
-  const [al, setal] = useState(false);
+  // const [mintedAl, setmintedAl] = useState(0);
+  // const [al, setal] = useState(false);
 
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -153,17 +153,17 @@ function App() {
     }
   };
 
-  const checkMintedAl = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      blockchain.smartContract.methods
-        .claimedAl(blockchain.account)
-        .call()
-        .then((receipt) => {
-          setmintedAl(receipt);
-          dispatch(fetchData(blockchain.account));
-        });
-    }
-  };
+  // const checkMintedAl = () => {
+  //   if (blockchain.account !== "" && blockchain.smartContract !== null) {
+  //     blockchain.smartContract.methods
+  //       .claimedAl(blockchain.account)
+  //       .call()
+  //       .then((receipt) => {
+  //         setmintedAl(receipt);
+  //         dispatch(fetchData(blockchain.account));
+  //       });
+  //   }
+  // };
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
@@ -220,15 +220,15 @@ function App() {
   useEffect(() => {
     getConfig();
     checkMinted();
-    checkMintedAl();
-    checkAl();
+    // checkMintedAl();
+    // checkAl();
   }, []);
 
   useEffect(() => {
     getData();
     checkMinted();
-    checkMintedAl();
-    checkAl();
+    // checkMintedAl();
+    // checkAl();
   }, [blockchain.account]);
 
   return (
@@ -237,9 +237,9 @@ function App() {
         flex={1}
         ai={"center"}
         style={{ padding: 20, backgroundColor: "rgba(0,0,0,0)" }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.png" : null}
+        image={CONFIG.SHOW_BACKGROUND ? "/config/images/学校.jpg" : null}
       >
-        <s.StyledKeyImg alt={"logo"} src={"/config/images/key_vid.png"} />
+        <s.StyledKeyImg alt={"logo"} src={"/config/images/header.jpg"} />
         <s.ResponsiveWrapper flex={1} style={{ padding: 10 }} test>
           <s.Container
             flex={2}
@@ -256,22 +256,16 @@ function App() {
             <s.TextTitle
             style={{ textAlign: "center" }}
             >
-              Neo Tokyo Punks Cartoon
+              NFT ミントページ
             </s.TextTitle>
             <s.SpacerSmall />
             <s.TextSubTitle
             // style={{ textAlign: "center" }}
             >
-              Neo Tokyo Punks Cartoonは、
-              <br class={"sp-only"} />
-              Neo Tokyo Punksのギルドから生まれたコレクションです。
-              <br />
-              ギルドメンバーをはじめ、
-              <br class={"sp-only"} />
-              皆様の楽しいNFT活動を応援しています。
+              NFTの購入体験をしていただくためのページです。
             </s.TextSubTitle>
             <s.SpacerLarge />
-            <s.StyledLogo alt={"logo"} src={"/config/images/sample.png"} />
+            <s.StyledLogo alt={"logo"} src={"/config/images/logo512.png"} />
             <s.TextTitle
               style={{
                 textAlign: "center",
@@ -316,11 +310,6 @@ function App() {
             ) : (
               <>
                 <s.TextTitle style={{ textAlign: "center" }}>価格</s.TextTitle>
-                <s.TextSubTitle style={{ textAlign: "center" }}>
-                  {"オーダーミント: "}
-                  {CONFIG.DISPLAY_COST_AL}
-                  {CONFIG.NETWORK.SYMBOL}
-                </s.TextSubTitle>
                 <s.TextSubTitle style={{ textAlign: "center" }}>
                   {"パブリックミント: "}
                   {CONFIG.DISPLAY_COST}
@@ -371,166 +360,10 @@ function App() {
                     </s.TextDescription>
                     <s.SpacerSmall />
                     <s.Container>
-                      {/* ALチェックここから */}
-                      {al > 0 ? ( //AL所有確認
-                        <>
-                          {data.alSaleStart ? ( // セール開始チェック
-                            <>
-                              {mintedAl >= 2 ? ( //ミント済確認
-                                <>
-                                  <s.Container
-                                    ai={"center"}
-                                    jc={"center"}
-                                    fd={"row"}
-                                  >
-                                    <s.TextSubTitle
-                                      style={{
-                                        textAlign: "center",
-                                      }}
-                                    >
-                                      最大枚数ミント済
-                                    </s.TextSubTitle>
-                                  </s.Container>
-                                </>
-                              ) : (
-                                //残りミント可能枠有り
-                                <>
-                                  <s.Container
-                                    ai={"center"}
-                                    jc={"center"}
-                                    fd={"row"}
-                                  >
-                                    <s.TextSubTitle
-                                      style={{
-                                        textAlign: "center",
-                                      }}
-                                    >
-                                      プレオーダー
-                                      <br class={"sp-only"} /> {mintedAl} / 2
-                                      ミント済
-                                    </s.TextSubTitle>
-                                    <s.SpacerSmall />
-                                  </s.Container>
-                                  <s.Container
-                                    ai={"center"}
-                                    jc={"center"}
-                                  >
-                                    <s.TextDescription
-                                      style={{
-                                        textAlign: "center",
-                                      }}
-                                    >
-                                      ※ 必ず事前にオーダーした枚数のみ<br class={"sp-only"} />ミントするようにしてください.<br />
-                                      ※ 誤って余分にミントしてしまった場合、<br />余剰分はランダムデザインで補填しますが、<br/>
-                                      差額の保証は致しません.
-                                    </s.TextDescription>
-                                  </s.Container>
-                                  <s.Container>
-                                    <s.SpacerSmall />
-                                    <s.Container
-                                      ai={"center"}
-                                      jc={"center"}
-                                      fd={"row"}
-                                    >
-                                      <s.StyledRoundButton
-                                        style={{ lineHeight: 0.4 }}
-                                        disabled={claimingNft ? 1 : 0}
-                                        onClick={(e) => {
-                                          e.preventDefault();
-                                          decrementMintAmountAl();
-                                        }}
-                                      >
-                                        -
-                                      </s.StyledRoundButton>
-                                      <s.SpacerMedium />
-                                      <s.TextDescription
-                                        style={{
-                                          textAlign: "center",
-                                        }}
-                                      >
-                                        {mintAmountAl}
-                                      </s.TextDescription>
-                                      <s.SpacerMedium />
-                                      <s.StyledRoundButton
-                                        disabled={claimingNft ? 1 : 0}
-                                        onClick={(e) => {
-                                          e.preventDefault();
-                                          incrementMintAmountAl();
-                                        }}
-                                      >
-                                        +
-                                      </s.StyledRoundButton>
-                                    </s.Container>
-                                  </s.Container>
-                                  <s.SpacerSmall />
-                                  <s.Container
-                                    ai={"center"}
-                                    jc={"center"}
-                                    fd={"row"}
-                                  >
-                                    <s.StyledButton
-                                      disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
-                                      onClick={(e) => {
-                                        e.preventDefault();
-                                        claimNFTsAl();
-                                        getData();
-                                      }}
-                                    >
-                                      {claimingNft
-                                        ? "ミント中..."
-                                        : "ミント開始"}
-                                    </s.StyledButton>
-                                  </s.Container>
-                                </>
-                              )}
-                            </>
-                          ) : (
-                            // セール開始前
-                            <>
-                              <s.Container
-                                ai={"center"}
-                                jc={"center"}
-                                fd={"row"}
-                              >
-                                <s.TextDescription
-                                // style={{
-                                //  ,
-                                // }}
-                                >
-                                  {"あなたはプレオーダーミントの対象です."}
-                                </s.TextDescription>
-                              </s.Container>
-                              <s.Container
-                                ai={"center"}
-                                jc={"center"}
-                                fd={"row"}
-                              >
-                                <s.TextDescription>
-                                  {"プレオーダー開始までお待ちください."}
-                                </s.TextDescription>
-                              </s.Container>
-                            </>
-                          )}
-                        </>
-                      ) : (
-                        //AL所有無し
-                        <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                          <s.TextDescription
-                            style={{
-                              textAlign: "center",
-                            }}
-                          >
-                            {"あなたはプレオーダーミントの対象ではありません."}
-                          </s.TextDescription>
-                        </s.Container>
-                      )}
-                      <s.SpacerMedium />
-                      {/* ALチェックここまで */}
-
                       {/* PSここから */}
                       {data.saleStart ? ( //PS開始チェック
                         <>
-                          {minted >= 10 ? ( //ミント済確認
+                          {minted >= 3 ? ( //ミント済確認
                             <>
                               <s.SpacerMedium />
                               <s.Container
@@ -565,7 +398,7 @@ function App() {
                                     }}
                                   >
                                     パブリックセール
-                                    <br class={"sp-only"} /> {minted} / 10
+                                    <br class={"sp-only"} /> {minted} / 3
                                     ミント済
                                   </s.TextSubTitle>
                                   <s.SpacerSmall />
@@ -649,20 +482,13 @@ function App() {
             </s.TextDescription>
             <s.SpacerXSmall />
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-              <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+              {/* <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
                 {CONFIG.MARKETPLACE}
               </s.StyledLink>
-              <s.SpacerXSmall />
+              <s.SpacerXSmall /> */}
               <s.StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                 {/* {truncate(CONFIG.CONTRACT_ADDRESS, 15)} */}
                 Etherscan
-              </s.StyledLink>
-              <s.SpacerXSmall />
-              <s.StyledLink
-                target={"_blank"}
-                href={"https://twitter.com/guild_ntp_oa"}
-              >
-                @guild_ntp_oa
               </s.StyledLink>
               {/* <s.StyledLinkTwi
                 target={"_blank"}

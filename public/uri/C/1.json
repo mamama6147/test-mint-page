@@ -1,0 +1,12 @@
+{
+  "attributes": [
+    { "trait_type": "hair", "value": "brownbob" },
+    { "trait_type": "skin", "value": "normal" },
+    { "trait_type": "clothes", "value": "uniform" },
+    { "trait_type": "accessories", "value": "none" },
+    { "trait_type": "background", "value": "yellow" }
+  ],
+  "image": "https://soco-engineering.com/uq/C/1.jpeg",
+  "name": "葉月みりあ #001",
+  "description": "watcherモード"
+}
