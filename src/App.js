@@ -482,10 +482,10 @@ function App() {
             </s.TextDescription>
             <s.SpacerXSmall />
             <s.Container jc={"center"} ai={"center"} style={{ width: "70%" }}>
-              {/* <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+              <s.StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
                 {CONFIG.MARKETPLACE}
               </s.StyledLink>
-              <s.SpacerXSmall /> */}
+              <s.SpacerXSmall />
               <s.StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                 {/* {truncate(CONFIG.CONTRACT_ADDRESS, 15)} */}
                 Etherscan
