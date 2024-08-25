@@ -1,0 +1,12 @@
+{
+  "attributes": [
+    { "trait_type": "hair", "value": "silvertwin" },
+    { "trait_type": "skin", "value": "normal" },
+    { "trait_type": "clothes", "value": "uniform" },
+    { "trait_type": "accessories", "value": "donut" },
+    { "trait_type": "background", "value": "brown" }
+  ],
+  "image": "https://soco-engineering.com/uq/C/3.jpeg",
+  "name": "葉月みりあ #003",
+  "description": "watcherモード"
+}

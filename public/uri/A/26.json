@@ -1,0 +1,12 @@
+{
+  "attributes": [
+    { "trait_type": "hair", "value": "blondlong" },
+    { "trait_type": "skin", "value": "normal" },
+    { "trait_type": "clothes", "value": "dress" },
+    { "trait_type": "accessories", "value": "none" },
+    { "trait_type": "background", "value": "blue" }
+  ],
+  "image": "https://soco-engineering.com/uq/A/2.jpeg",
+  "name": "葉月みりあ #002",
+  "description": "通常モード"
+}
