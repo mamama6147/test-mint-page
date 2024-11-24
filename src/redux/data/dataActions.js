@@ -29,20 +29,25 @@ export const fetchData = (account) => {
         .getState()
         .blockchain.smartContract.methods.totalSupply()
         .call();
-        let alSaleStart = await store
+        // let alSaleStart = await store
+        // .getState()
+        // .blockchain.smartContract.methods.preSaleStart()
+        // .call();
+        // let saleStart = await store
+        // .getState()
+        // .blockchain.smartContract.methods.pubSaleStart()
+        // .call();
+        let paused = await store
         .getState()
-        .blockchain.smartContract.methods.preSaleStart()
-        .call();
-        let saleStart = await store
-        .getState()
-        .blockchain.smartContract.methods.pubSaleStart()
+        .blockchain.smartContract.methods.paused()
         .call();
 
       dispatch(
         fetchDataSuccess({
           totalSupply,
-          alSaleStart,
-          saleStart, 
+          // alSaleStart,
+          // saleStart, 
+          paused,
         })
       );
     } catch (err) {

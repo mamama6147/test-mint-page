@@ -29,7 +29,7 @@ function App() {
   const data = useSelector((state) => state.data);
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(
-    `ボタンを押して NTPC をミントしよう.`
+    `ボタンを押してミントしよう.`
   );
   const [mintAmount, setMintAmount] = useState(1);
   const [mintAmountAl, setMintAmountAl] = useState(1);
@@ -58,57 +58,20 @@ function App() {
     SHOW_BACKGROUND: false,
   });
 
-  const claimNFTsAl = () => {
-    let cost = CONFIG.WEI_COST_AL;
-    let amount = mintAmountAl;
-    let gasLimit = CONFIG.GAS_LIMIT;
-    let totalCostWei = String(cost * amount);
-    let totalGasLimit = String(gasLimit * amount);
-    let proof = merkleTree.getHexProof(keccak256(blockchain.account));
-
-    console.log("ClaimMFTs at preSale: ", totalCostWei);
-    console.log("Cost: ", totalCostWei);
-    console.log("Gas limit: ", totalGasLimit);
-    setFeedback(`${CONFIG.NFT_NAME} プレオーダーミント中...`);
-    setClaimingNft(true);
-    blockchain.smartContract.methods
-      .preMint(amount, proof)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
-        from: blockchain.account,
-        value: totalCostWei,
-        maxPriorityFeePerGas: "40000000000",
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("プレオーダーミントに失敗しました.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(`プレオーダーミントが成功しました!`);
-        setClaimingNft(false);
-        checkMinted();
-        checkMintedAl();
-        // dispatch(fetchData(blockchain.account));
-      });
-  };
-
-  const claimNFTsPS = () => {
+  const mintNFTs = () => {
     let cost = CONFIG.WEI_COST;
     let amount = mintAmount;
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalCostWei = String(cost * amount);
     let totalGasLimit = String(gasLimit * amount);
 
-    console.log("ClaimMFTs at pubSale: ", totalCostWei);
+    console.log("mintingMFTs: ", totalCostWei);
     console.log("Cost: ", totalCostWei);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`${CONFIG.NFT_NAME} ミント中...`);
     setClaimingNft(true);
     blockchain.smartContract.methods
-      .pubMint(amount)
+      .mint(amount)
       .send({
         gasLimit: String(totalGasLimit),
         to: CONFIG.CONTRACT_ADDRESS,
@@ -125,33 +88,106 @@ function App() {
         console.log(receipt);
         setFeedback(`ミントに成功しました!`);
         setClaimingNft(false);
-        checkMinted();
-        checkMintedAl();
+        // checkMinted();
+        // checkMintedAl();
         // dispatch(fetchData(blockchain.account));
       });
   };
 
-  const checkAl = () => {
-    // マークルプルーフを生成
-    let proof = merkleTree.getHexProof(keccak256(blockchain.account));
-    if (proof.length >= 1) {
-      setal(true);
-    } else {
-      setal(false);
-    }
-  };
+  // const claimNFTsAl = () => {
+  //   let cost = CONFIG.WEI_COST_AL;
+  //   let amount = mintAmountAl;
+  //   let gasLimit = CONFIG.GAS_LIMIT;
+  //   let totalCostWei = String(cost * amount);
+  //   let totalGasLimit = String(gasLimit * amount);
+  //   let proof = merkleTree.getHexProof(keccak256(blockchain.account));
 
-  const checkMinted = () => {
-    if (blockchain.account !== "" && blockchain.smartContract !== null) {
-      blockchain.smartContract.methods
-        .claimed(blockchain.account)
-        .call()
-        .then((receipt) => {
-          setminted(receipt);
-          dispatch(fetchData(blockchain.account));
-        });
-    }
-  };
+  //   console.log("ClaimMFTs at preSale: ", totalCostWei);
+  //   console.log("Cost: ", totalCostWei);
+  //   console.log("Gas limit: ", totalGasLimit);
+  //   setFeedback(`${CONFIG.NFT_NAME} プレオーダーミント中...`);
+  //   setClaimingNft(true);
+  //   blockchain.smartContract.methods
+  //     .preMint(amount, proof)
+  //     .send({
+  //       gasLimit: String(totalGasLimit),
+  //       to: CONFIG.CONTRACT_ADDRESS,
+  //       from: blockchain.account,
+  //       value: totalCostWei,
+  //       maxPriorityFeePerGas: "40000000000",
+  //     })
+  //     .once("error", (err) => {
+  //       console.log(err);
+  //       setFeedback("プレオーダーミントに失敗しました.");
+  //       setClaimingNft(false);
+  //     })
+  //     .then((receipt) => {
+  //       console.log(receipt);
+  //       setFeedback(`プレオーダーミントが成功しました!`);
+  //       setClaimingNft(false);
+  //       // checkMinted();
+  //       // checkMintedAl();
+  //       // dispatch(fetchData(blockchain.account));
+  //     });
+  // };
+
+  // const claimNFTsPS = () => {
+  //   let cost = CONFIG.WEI_COST;
+  //   let amount = mintAmount;
+  //   let gasLimit = CONFIG.GAS_LIMIT;
+  //   let totalCostWei = String(cost * amount);
+  //   let totalGasLimit = String(gasLimit * amount);
+
+  //   console.log("ClaimMFTs at pubSale: ", totalCostWei);
+  //   console.log("Cost: ", totalCostWei);
+  //   console.log("Gas limit: ", totalGasLimit);
+  //   setFeedback(`${CONFIG.NFT_NAME} ミント中...`);
+  //   setClaimingNft(true);
+  //   blockchain.smartContract.methods
+  //     .pubMint(amount)
+  //     .send({
+  //       gasLimit: String(totalGasLimit),
+  //       to: CONFIG.CONTRACT_ADDRESS,
+  //       from: blockchain.account,
+  //       value: totalCostWei,
+  //       maxPriorityFeePerGas: "40000000000",
+  //     })
+  //     .once("error", (err) => {
+  //       console.log(err);
+  //       setFeedback("ミントに失敗しました.");
+  //       setClaimingNft(false);
+  //     })
+  //     .then((receipt) => {
+  //       console.log(receipt);
+  //       setFeedback(`ミントに成功しました!`);
+  //       setClaimingNft(false);
+  //       // checkMinted();
+  //       // checkMintedAl();
+  //       // dispatch(fetchData(blockchain.account));
+  //     });
+  // };
+
+  // const checkAl = () => {
+  //   // マークルプルーフを生成
+  //   let proof = merkleTree.getHexProof(keccak256(blockchain.account));
+  //   if (proof.length >= 1) {
+  //     setal(true);
+  //   } else {
+  //     setal(false);
+  //   }
+  // };
+
+  // const checkMinted = () => {
+  //   if (blockchain.account !== "" && blockchain.smartContract !== null) {
+  //     blockchain.smartContract.methods
+  //       .claimed(blockchain.account)
+  //       .call()
+  //       .then((receipt) => {
+  //         setminted(receipt);
+  //         dispatch(fetchData(blockchain.account));
+  //       });
+  //   }
+  // };
 
   // const checkMintedAl = () => {
   //   if (blockchain.account !== "" && blockchain.smartContract !== null) {
@@ -219,14 +255,15 @@ function App() {
 
   useEffect(() => {
     getConfig();
-    checkMinted();
+    // checkMinted();
     // checkMintedAl();
     // checkAl();
   }, []);
 
   useEffect(() => {
     getData();
-    checkMinted();
+    console.log(data)
+    // checkMinted();
     // checkMintedAl();
     // checkAl();
   }, [blockchain.account]);
@@ -361,7 +398,7 @@ function App() {
                     <s.SpacerSmall />
                     <s.Container>
                       {/* PSここから */}
-                      {data.saleStart ? ( //PS開始チェック
+                      {!(data.paused) ? ( //PS開始チェック
                         <>
                           {minted >= 3 ? ( //ミント済確認
                             <>
@@ -392,7 +429,7 @@ function App() {
                                   jc={"center"}
                                   fd={"row"}
                                 >
-                                  <s.TextSubTitle
+                                  {/* <s.TextSubTitle
                                     style={{
                                       textAlign: "center",
                                     }}
@@ -401,7 +438,7 @@ function App() {
                                     <br class={"sp-only"} /> {minted} / 3
                                     ミント済
                                   </s.TextSubTitle>
-                                  <s.SpacerSmall />
+                                  <s.SpacerSmall /> */}
                                 </s.Container>
                                 <s.Container
                                   ai={"center"}
@@ -448,7 +485,8 @@ function App() {
                                   disabled={claimingNft ? 1 : 0} //claimingNftPsがtrueなら disabledを表示させる。＝クリックできない
                                   onClick={(e) => {
                                     e.preventDefault();
-                                    claimNFTsPS();
+                                    // claimNFTsPS();
+                                    mintNFTs();
                                     getData();
                                   }}
                                 >
