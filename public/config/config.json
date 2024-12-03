@@ -1,6 +1,6 @@
 {
-  "CONTRACT_ADDRESS": "0xcc04dfb321227d241b5aeb7fc7f39ee456a74f57",
-  "SCAN_LINK": "https://sepolia.etherscan.io/address/0xcc04dfb321227d241b5aeb7fc7f39ee456a74f57",
+  "CONTRACT_ADDRESS": "0x9C801d577e53B834086221FfA371fCfDD8d8c75f",
+  "SCAN_LINK": "https://sepolia.etherscan.io/address/0x9C801d577e53B834086221FfA371fCfDD8d8c75f",
   "NETWORK": {
     "NAME": "Ethereum",
     "SYMBOL": "SepoliaETH",
